@@ -46,6 +46,8 @@ The folders under the src folder are listed as follows
 - [layouts](./src/layouts/) - This is for layouts like Nav bar, headers, footers etc.
 - [lib](./src/lib/) - The external library that we use. Like Axios, Faced Pattern. Faced put over any library
 - [services](./src/services/) - Different Services like API or graphql
+- [routes](./src/routes/) - The centralized route files
+- [features](./src/features/) - Contains certain features and its relevant files
 
 
 

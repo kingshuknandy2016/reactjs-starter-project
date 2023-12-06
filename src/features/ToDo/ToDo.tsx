@@ -1,20 +1,20 @@
-import { Box, Container, Grid } from "@mui/material";
-import { ButtonAppBar } from "../navbar/navbar";
+import { Box, Container, Grid } from '@mui/material';
+import { ButtonAppBar } from '../../layouts/navbar';
 
-import { ToDoList } from "./ToDoList";
-import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
-import { useState } from "react";
-import AddToDo from "./AddToDo";
-import { useSelector } from "react-redux";
-import { StateInterface } from "../../store/reducers/TaskReducer";
-import { ToDoProp } from "./ToDoItem";
+import { ToDoList } from './ToDoList';
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import { useState } from 'react';
+import AddToDo from './AddToDo';
+import { useSelector } from 'react-redux';
+import { StateInterface } from '../../store/reducers/ToDoTaskReducer';
+import { ToDoProp } from './ToDoItem';
 
 // Static List For Testing
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const items: ToDoProp[] = [
-  { id: 1, text: "Please Perform" },
-  { id: 2, text: "Want to Play" },
+  { id: 1, text: 'Please Perform' },
+  { id: 2, text: 'Want to Play' },
 ];
 
 export const ToDo = () => {
@@ -40,7 +40,7 @@ export const ToDo = () => {
               <Grid
                 display="flex"
                 alignItems="center"
-                justifyContent={"center"}
+                justifyContent={'center'}
                 item
                 xs={6}
               >
@@ -48,7 +48,7 @@ export const ToDo = () => {
                   onClick={addToDoHandler}
                   size="large"
                   variant="contained"
-                  color={"success"}
+                  color={'success'}
                 >
                   Add To Do
                 </Button>
@@ -56,11 +56,11 @@ export const ToDo = () => {
               <Grid
                 display="flex"
                 alignItems="center"
-                justifyContent={"center"}
+                justifyContent={'center'}
                 item
                 xs={6}
               >
-                <Button size="large" variant="contained" color={"error"}>
+                <Button size="large" variant="contained" color={'error'}>
                   Remove To Do
                 </Button>
               </Grid>

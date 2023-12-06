@@ -1,9 +1,9 @@
-import { Route, Routes } from "react-router-dom";
-import SignIn from "./SignIn";
-import SignUp from "./SignUp";
-import NotFound from "./NotFound";
-import HomePage from "./HomePage";
-import { ToDo } from "./ToDo/ToDo";
+import { Route, Routes } from 'react-router-dom';
+import SignIn from '../pages/SignIn';
+import SignUp from '../pages/SignUp';
+import NotFound from '../pages/NotFound';
+import HomePage from '../pages/HomePage';
+import { ToDo } from '../features/ToDo/ToDo';
 
 const RoutesCustom = () => {
   return (

@@ -1,5 +1,5 @@
-import { Box, Stack } from "@mui/material";
-import { ToDoItem, ToDoProp } from "./ToDoItem";
+import { Box, Stack } from '@mui/material';
+import { ToDoItem, ToDoProp } from './ToDoItem';
 
 interface ToDoListProps {
   items: ToDoProp[];

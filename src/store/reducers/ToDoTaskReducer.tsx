@@ -1,4 +1,4 @@
-import { ToDoProp } from "../../components/ToDo/ToDoItem";
+import { ToDoProp } from '../../features/ToDo/ToDoItem';
 
 export interface StateInterface {
   tasks: ToDoProp[];
@@ -10,17 +10,17 @@ const initialState: StateInterface = {
   tasks,
 };
 
-const taskReducer = (
+const ToDoTaskReducer = (
   state = initialState,
   action: { type: any; payload: any }
 ) => {
   switch (action.type) {
-    case "ADD_TASK":
+    case 'ADD_TASK':
       return {
         ...state,
         tasks: [...state.tasks, action.payload],
       };
-    case "DELETE_TASK":
+    case 'DELETE_TASK':
       return {
         ...state,
         tasks: state.tasks.filter(
@@ -29,7 +29,7 @@ const taskReducer = (
       };
 
     //Need To Update the Logic
-    case "UPDATE_TASK":
+    case 'UPDATE_TASK':
       alert(action.payload);
       // const specificTaskIndex = state.tasks.findIndex(
       //   (task: ToDoProp) => task.id === action.payload
@@ -44,4 +44,4 @@ const taskReducer = (
   }
 };
 
-export default taskReducer;
+export default ToDoTaskReducer;

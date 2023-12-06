@@ -1,11 +1,11 @@
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import { useDispatch } from "react-redux";
-import { deleteTodo, updateToDo } from "../../store/actions";
-import { useRef, useState } from "react";
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import { useDispatch } from 'react-redux';
+import { deleteTodo, updateToDo } from '../../store/actions';
+import { useRef, useState } from 'react';
 
 export interface ToDoProp {
   id: number;
@@ -24,14 +24,14 @@ export const ToDoItem = (props: ToDoProp) => {
 
   // Need to Implement the Action UI and Reducer
   const onClickUpdateButtonHandler = () => {
-    console.log("Clicked on Update ");
+    console.log('Clicked on Update ');
     setShowEditContent(true);
   };
 
   const onUpdatingHandler = () => {
-    console.log("Updated ");
+    console.log('Updated ');
     const task = ref.current?.value.trim();
-    if (task !== "" && task != null) {
+    if (task !== '' && task != null) {
       dispatch(updateToDo(task));
     }
 

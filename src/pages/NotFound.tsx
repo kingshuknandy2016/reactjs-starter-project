@@ -1,4 +1,4 @@
-import { ButtonAppBar } from "./navbar/navbar";
+import { ButtonAppBar } from '../layouts/navbar';
 
 const NotFound = () => {
   return (

@@ -1,27 +1,30 @@
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import Modal from "@mui/material/Modal";
-import React, { MouseEvent, useRef } from "react";
-import TextArea from "../CustomComponents/TextArea";
-import { addTodo } from "../../store/actions";
-import { useDispatch } from "react-redux";
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import React, { MouseEvent, useRef } from 'react';
+import TextArea from '../../components/TextArea';
+import { addTodo } from '../../store/actions';
+import { useDispatch } from 'react-redux';
 
 const style = {
-  position: "absolute" as "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
+  position: 'absolute' as const,
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
   width: 400,
-  bgcolor: "background.paper",
-  border: "2px solid #000",
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
   boxShadow: 24,
   p: 4,
 };
 
 interface AddToDoProps {
   modalOpen: boolean;
-  handleClose: (event: {}, reason: "backdropClick" | "escapeKeyDown") => void;
+  handleClose: (
+    event: unknown,
+    reason: 'backdropClick' | 'escapeKeyDown'
+  ) => void;
   handleOpen: (event: MouseEvent<HTMLButtonElement>) => void;
 }
 const AddToDo = (props: AddToDoProps) => {
@@ -30,11 +33,11 @@ const AddToDo = (props: AddToDoProps) => {
 
   const addTaskHandler = () => {
     const task = ref.current?.value.trim();
-    if (task !== "" && task != null) {
-      console.log("Add a new Task");
+    if (task !== '' && task != null) {
+      console.log('Add a new Task');
       dispatch(addTodo(task));
     }
-    props.handleClose({}, "backdropClick");
+    props.handleClose({}, 'backdropClick');
   };
   return (
     <div>

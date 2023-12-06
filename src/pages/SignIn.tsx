@@ -1,18 +1,23 @@
-import * as React from "react";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Link as LinkRouter, useNavigate } from "react-router-dom";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import * as React from 'react';
+import Avatar from '@mui/material/Avatar';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Link as LinkRouter, useNavigate } from 'react-router-dom';
+import { getSavedValue, useLocalStorage } from '../hooks/useLocalStorage';
+import { mockAuthenticateAPI } from '../services/mockApiService';
+import { verifyToken } from '../services/TokenService';
+import { useEffect, useState } from 'react';
 
 function Copyright(props: any) {
   return (
@@ -22,12 +27,12 @@ function Copyright(props: any) {
       align="center"
       {...props}
     >
-      {"Copyright © "}
+      {'Copyright © '}
       <Link color="inherit" href="https://mui.com/">
         Your Website
-      </Link>{" "}
+      </Link>{' '}
       {new Date().getFullYear()}
-      {"."}
+      {'.'}
     </Typography>
   );
 }
@@ -35,18 +40,41 @@ function Copyright(props: any) {
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-export default function SignIn() {
+const SignIn = () => {
+  const [username, setUsername] = useLocalStorage('username', '');
+  const [password, setPassword] = useLocalStorage('password', '');
+  //const [token, setToken] = useLocalStorage('token', '');
+  //const [role, setRole] = useLocalStorage('role', '');
+
   const navigate = useNavigate();
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const email = data.get('email') as string;
+    const password = data.get('password') as string;
 
-    // Need To Add the validation logic
-    navigate("/home");
+    // Mock authentication API call
+    const token = mockAuthenticateAPI(email, password);
+    if (token) {
+      const tokenData = verifyToken(token);
+      // setToken(token);
+      // setRole(tokenData.role);
+      localStorage.setItem('token', token);
+      localStorage.setItem('role', tokenData.role);
+      localStorage.removeItem('username');
+      localStorage.removeItem('password');
+      navigate('/home');
+    }
+  };
+
+  const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    if (name === 'email') {
+      setUsername(value);
+    } else {
+      setPassword(value);
+    }
   };
 
   return (
@@ -56,12 +84,12 @@ export default function SignIn() {
         <Box
           sx={{
             marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
@@ -81,7 +109,10 @@ export default function SignIn() {
               label="Email Address"
               name="email"
               autoComplete="email"
+              // eslint-disable-next-line jsx-a11y/no-autofocus
               autoFocus
+              value={username}
+              onChange={onChangeHandler}
             />
             <TextField
               margin="normal"
@@ -92,6 +123,8 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={password}
+              onChange={onChangeHandler}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -126,4 +159,6 @@ export default function SignIn() {
       </Container>
     </ThemeProvider>
   );
-}
+};
+
+export default SignIn;
